@@ -54,10 +54,11 @@ $version = Version::fromString('1.2.3-rc.1+exp.sha.5114f85');
 
 ```php
 use SemVer\SemVer\Version;
+use SemVer\SemVer\VersionComparator;
 
 $version1 = Version::fromString('1.2.3');
 $version2 = Version::fromString('1.2.3-rc.1+exp.sha.5114f85');
-var_dump($version1->compare($version2)); // 1
+var_dump(VersionComparator::compare($version1, $version2)); // 1
 var_dump($version1->equals($version2)); // false
 var_dump($version1->greaterThan($version2)); // true
 var_dump($version1->greaterThanOrEqual($version2)); // true

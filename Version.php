@@ -116,7 +116,7 @@ final class Version
         usort(
             $versions,
             function (Version $a, Version $b) {
-                return $a->compare($b);
+                return VersionComparator::compare($a, $b);
             }
         );
 
@@ -166,77 +166,11 @@ final class Version
     /**
      * @param Version $other
      *
-     * @return int
-     */
-    public function compare(Version $other) : int
-    {
-        $compare = $this->major <=> $other->major;
-        if (0 !== $compare) {
-            return $compare;
-        }
-        $compare = $this->minor <=> $other->minor;
-        if (0 !== $compare) {
-            return $compare;
-        }
-        $compare = $this->patch <=> $other->patch;
-        if (0 !== $compare) {
-            return $compare;
-        }
-
-        $myPreReleaseIsEmpty    = '' === $this->preRelease;
-        $otherPreReleaseIsEmpty = '' === $other->preRelease;
-        if ($otherPreReleaseIsEmpty !== $myPreReleaseIsEmpty) {
-            return $myPreReleaseIsEmpty ? 1 : -1;
-        }
-
-        if (!$myPreReleaseIsEmpty) {
-            // need to compare each subversion
-            $myPreRelease    = explode('.', $this->preRelease);
-            $theirPreRelease = explode('.', $other->preRelease);
-
-            do {
-                $myCurrentPreReleasePart    = array_shift($myPreRelease);
-                $theirCurrentPreReleasePart = array_shift($theirPreRelease);
-
-                $myCurrentPreReleasePartIsNull    = null === $myCurrentPreReleasePart;
-                $theirCurrentPreReleasePartIsNull = null === $theirCurrentPreReleasePart;
-
-                if ($myCurrentPreReleasePartIsNull !== $theirCurrentPreReleasePartIsNull) {
-                    return $myCurrentPreReleasePartIsNull ? -1 : 1;
-                }
-
-                $mineIsInt  = ctype_digit($myCurrentPreReleasePart) && strpos($myCurrentPreReleasePart, '00') !== 0;
-                $theirIsInt = ctype_digit($theirCurrentPreReleasePart) && strpos(
-                        $theirCurrentPreReleasePart,
-                        '00'
-                    ) !== 0;
-
-                if ($mineIsInt !== $theirIsInt) {
-                    return $mineIsInt ? -1 : 1;
-                }
-                if ($mineIsInt) {
-                    $myCurrentPreReleasePart    = (int) $myCurrentPreReleasePart;
-                    $theirCurrentPreReleasePart = (int) $theirCurrentPreReleasePart;
-                }
-
-                $compare = $myCurrentPreReleasePart <=> $theirCurrentPreReleasePart;
-                if (0 !== $compare) {
-                    return $compare;
-                }
-            } while (count($myPreRelease) || count($theirPreRelease));
-        }
-
-        return 0;
-    }
-
-    /**
-     * @param Version $other
-     *
      * @return bool
      */
     public function equals(Version $other) : bool
     {
-        return 0 === $this->compare($other);
+        return 0 === VersionComparator::compare($this, $other);
     }
 
     /**
@@ -246,7 +180,7 @@ final class Version
      */
     public function greaterThan(Version $other) : bool
     {
-        return 1 === $this->compare($other);
+        return 1 === VersionComparator::compare($this, $other);
     }
 
     /**
@@ -256,7 +190,7 @@ final class Version
      */
     public function greaterThanOrEqual(Version $other) : bool
     {
-        return 0 <= $this->compare($other);
+        return 0 <= VersionComparator::compare($this, $other);
     }
 
     /**
@@ -266,7 +200,7 @@ final class Version
      */
     public function lessThan(Version $other) : bool
     {
-        return -1 === $this->compare($other);
+        return -1 === VersionComparator::compare($this, $other);
     }
 
     /**
@@ -276,6 +210,6 @@ final class Version
      */
     public function lessThanOrEqual(Version $other) : bool
     {
-        return 0 >= $this->compare($other);
+        return 0 >= VersionComparator::compare($this, $other);
     }
 }
