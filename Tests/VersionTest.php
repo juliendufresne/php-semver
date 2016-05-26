@@ -200,48 +200,6 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // sort()
-    ////////////////////////////////////////////////////////////////////////////
-    public function testSort()
-    {
-        $result = Version::sort(
-            [
-                Version::fromString('2.0.0'),
-                Version::fromString('1.10.10'),
-            ]
-        );
-        $expectedResult =
-            [
-                Version::fromString('1.10.10'),
-                Version::fromString('2.0.0'),
-            ];
-        do {
-            $shiftResult   = array_shift($result);
-            $shiftExpected = array_shift($expectedResult);
-            static::assertEquals(
-                $shiftExpected->getMajor(),
-                $shiftResult->getMajor(),
-                '::sort() versions must be ordered by major version'
-            );
-            static::assertEquals(
-                $shiftExpected->getMinor(),
-                $shiftResult->getMinor(),
-                '::sort() versions must be ordered by major version'
-            );
-            static::assertEquals(
-                $shiftExpected->getPatch(),
-                $shiftResult->getPatch(),
-                '::sort() versions must be ordered by major version'
-            );
-            static::assertEquals(
-                $shiftExpected->getPreRelease(),
-                $shiftResult->getPreRelease(),
-                '::sort() versions must be ordered by major version'
-            );
-        } while (count($result) || count($expectedResult));
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
     // __toString()
     ////////////////////////////////////////////////////////////////////////////
     public function testToString()
@@ -256,6 +214,19 @@ final class VersionTest extends PHPUnit_Framework_TestCase
         foreach ($data as $item) {
             static::assertEquals($item, (string) Version::fromString($item));
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // equals()
+    ////////////////////////////////////////////////////////////////////////////
+    public function testEquals()
+    {
+        $current = new Version(1, 0, 0);
+        $other   = new Version(1, 0, 0);
+        static::assertEquals(true, $other->equals($current));
+        $current = new Version(1, 1, 0);
+        $other   = new Version(1, 0, 0);
+        static::assertEquals(false, $other->equals($current));
     }
 
     ////////////////////////////////////////////////////////////////////////////

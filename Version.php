@@ -107,23 +107,6 @@ final class Version
     }
 
     /**
-     * @param array $versions
-     *
-     * @return array
-     */
-    public static function sort(array $versions) : array
-    {
-        usort(
-            $versions,
-            function (Version $a, Version $b) {
-                return VersionComparator::compare($a, $b);
-            }
-        );
-
-        return $versions;
-    }
-
-    /**
      * @return int
      */
     public function getMajor() : int

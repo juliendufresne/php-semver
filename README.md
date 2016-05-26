@@ -80,7 +80,7 @@ $versions = [
     Version::fromString('1.3.3-alpha.2'),
     Version::fromString('1.2.3-rc.1+exp.sha.5114f85'),
 ];
-var_dump(Version::sort($versions));
+var_dump(VersionSorter::sort($versions));
 // Result:
 // [
 //    Version::fromString('1.2.3-rc.1+exp.sha.5114f85'),
