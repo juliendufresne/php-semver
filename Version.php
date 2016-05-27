@@ -151,7 +151,7 @@ final class Version
      *
      * @return bool
      */
-    public function equals(Version $other) : bool
+    public function isEquals(Version $other) : bool
     {
         return 0 === VersionComparator::compare($this, $other);
     }
@@ -161,7 +161,7 @@ final class Version
      *
      * @return bool
      */
-    public function greaterThan(Version $other) : bool
+    public function isGreaterThan(Version $other) : bool
     {
         return 1 === VersionComparator::compare($this, $other);
     }
@@ -171,7 +171,7 @@ final class Version
      *
      * @return bool
      */
-    public function greaterThanOrEqual(Version $other) : bool
+    public function isGreaterThanOrEqual(Version $other) : bool
     {
         return 0 <= VersionComparator::compare($this, $other);
     }
@@ -181,7 +181,7 @@ final class Version
      *
      * @return bool
      */
-    public function lessThan(Version $other) : bool
+    public function isLessThan(Version $other) : bool
     {
         return -1 === VersionComparator::compare($this, $other);
     }
@@ -191,7 +191,7 @@ final class Version
      *
      * @return bool
      */
-    public function lessThanOrEqual(Version $other) : bool
+    public function isLessThanOrEqual(Version $other) : bool
     {
         return 0 >= VersionComparator::compare($this, $other);
     }
