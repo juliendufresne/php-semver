@@ -223,10 +223,10 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 0, 0);
-        static::assertEquals(true, $other->equals($current));
+        static::assertEquals(true, $other->isEquals($current));
         $current = new Version(1, 1, 0);
         $other   = new Version(1, 0, 0);
-        static::assertEquals(false, $other->equals($current));
+        static::assertEquals(false, $other->isEquals($current));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -236,8 +236,8 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);
-        static::assertEquals(false, $current->greaterThan($other));
-        static::assertEquals(true, $other->greaterThan($current));
+        static::assertEquals(false, $current->isGreaterThan($other));
+        static::assertEquals(true, $other->isGreaterThan($current));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -247,8 +247,8 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);
-        static::assertEquals(false, $current->greaterThanOrEqual($other));
-        static::assertEquals(true, $other->greaterThanOrEqual($current));
+        static::assertEquals(false, $current->isGreaterThanOrEqual($other));
+        static::assertEquals(true, $other->isGreaterThanOrEqual($current));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -258,8 +258,8 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);
-        static::assertEquals(true, $current->lessThan($other));
-        static::assertEquals(false, $other->lessThan($current));
+        static::assertEquals(true, $current->isLessThan($other));
+        static::assertEquals(false, $other->isLessThan($current));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -269,7 +269,7 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);
-        static::assertEquals(true, $current->lessThanOrEqual($other));
-        static::assertEquals(false, $other->lessThanOrEqual($current));
+        static::assertEquals(true, $current->isLessThanOrEqual($other));
+        static::assertEquals(false, $other->isLessThanOrEqual($current));
     }
 }

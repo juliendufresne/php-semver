@@ -3,12 +3,14 @@ PHP7+ SemVer
 
 PHP implementation of the Semantic Versioning 2.0 documented on [semver.org](http://semver.org)
 
-[![Build Status][travis-master-svg]][travis-master-url] [![Coverage Status][coveralls-master-svg]][coveralls-master-url]
+[![Build Status][travis-master-img]][travis-master-url] [![Coverage Status][coveralls-master-img]][coveralls-master-url] [![Scrutinizer Code Quality][scrutinizer-master-img]][scrutinizer-master-url]
 
-[travis-master-svg]: https://travis-ci.org/git-pull-request/php-semver.svg?branch=master
+[travis-master-img]: https://travis-ci.org/git-pull-request/php-semver.svg?branch=master
 [travis-master-url]: https://travis-ci.org/git-pull-request/php-semver
-[coveralls-master-svg]: https://coveralls.io/repos/github/git-pull-request/php-semver/badge.svg?branch=master
+[coveralls-master-img]: https://coveralls.io/repos/github/git-pull-request/php-semver/badge.svg?branch=master
 [coveralls-master-url]: https://coveralls.io/github/git-pull-request/php-semver?branch=master
+[scrutinizer-master-img]: https://scrutinizer-ci.com/g/git-pull-request/php-semver/badges/quality-score.png?b=master
+[scrutinizer-master-url]: https://scrutinizer-ci.com/g/git-pull-request/php-semver/?branch=master
 
 Installation
 ------------
