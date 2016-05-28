@@ -59,9 +59,7 @@ return PhpCsFixer\Config::create()
             'no_blank_lines_after_class_opening' => true, // @Symfony
             'no_blank_lines_after_phpdoc' => true, // @Symfony
 //            'no_blank_lines_before_namespace' => false,
-            'no_blank_lines_between_uses' => true, // @Symfony
 //            'no_closing_tag' => true, // @PSR2, @Symfony
-            'no_duplicate_semicolons' => true, // @Symfony
             'no_empty_comment' => true,
             'no_empty_phpdoc' => true, // @Symfony
             'no_empty_statement' => true, // @Symfony
