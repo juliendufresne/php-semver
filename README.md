@@ -52,6 +52,79 @@ $version = Version::fromString('1.2.3+exp.sha.5114f85');
 $version = Version::fromString('1.2.3-rc.1+exp.sha.5114f85');
 ```
 
+### Update to next version
+
+It will always create a new Version, leaving the current as it is.
+
+**update the major version**
+
+```php
+use SemVer\SemVer\Version;
+
+$version = Version::fromString('1.2.3');
+$nextVersion = $version->major();
+
+var_dump($nextVersion->isEquals(new Version('2.0.0')); // true
+```
+
+Special case: when there is a pre-release and both minor and patch version are equals to 0, the next major version is the
+actual version without the pre-release
+
+```php
+use SemVer\SemVer\Version;
+
+$version = Version::fromString('1.0.0-rc.1');
+$nextVersion = $version->major();
+
+var_dump($nextVersion->isEquals(new Version('1.0.0')); // true
+```
+
+**update the minor version**
+
+```php
+use SemVer\SemVer\Version;
+
+$version = Version::fromString('1.2.3');
+$nextVersion = $version->minor();
+
+var_dump($nextVersion->isEquals(new Version('1.3.0')); // true
+```
+
+Special case: when there is a pre-release and the patch version is equal to 0, the next minor version is the
+actual version without the pre-release
+
+```php
+use SemVer\SemVer\Version;
+
+$version = Version::fromString('1.1.0-rc.1');
+$nextVersion = $version->minor();
+
+var_dump($nextVersion->isEquals(new Version('1.1.0')); // true
+```
+
+
+**update the patch version**
+
+```php
+use SemVer\SemVer\Version;
+
+$version = Version::fromString('1.2.3-rc.1');
+$nextVersion = $version->patch();
+
+var_dump($nextVersion->isEquals(new Version('1.2.3')); // true
+```
+
+Special case: when there is a pre-release, the next major version is the actual version without the pre-release
+
+```php
+use SemVer\SemVer\Version;
+
+$version = Version::fromString('1.0.0-rc.1');
+$nextVersion = $version->patch();
+
+var_dump($nextVersion->isEquals(new Version('1.0.0')); // true
+```
+
 ### Compare two versions
 
 ```php

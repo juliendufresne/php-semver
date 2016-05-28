@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "d0d76b434728fcf522270b67b454ed7e84e850ed"
+                "reference": "2b185644f973adeaa99f9270cdaa37d74d32f6a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/d0d76b434728fcf522270b67b454ed7e84e850ed",
-                "reference": "d0d76b434728fcf522270b67b454ed7e84e850ed",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/2b185644f973adeaa99f9270cdaa37d74d32f6a5",
+                "reference": "2b185644f973adeaa99f9270cdaa37d74d32f6a5",
                 "shasum": ""
             },
             "require": {
@@ -120,7 +120,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2016-05-26 23:59:22"
+            "time": "2016-05-28 01:25:40"
         },
         {
             "name": "guzzle/guzzle",

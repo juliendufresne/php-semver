@@ -217,9 +217,75 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // equals()
+    // major()
     ////////////////////////////////////////////////////////////////////////////
-    public function testEquals()
+    public function testMajor()
+    {
+        $data = [
+            '1.10.10'                  => '2.0.0',
+            '1.10.10-alpha.test'       => '2.0.0',
+            '1.10.10-alpha.test+build' => '2.0.0',
+            '1.10.10+build'            => '2.0.0',
+            '1.0.0+build'              => '2.0.0',
+            '1.0.0-alpha'              => '1.0.0',
+            '1.0.0-alpha+build'        => '1.0.0',
+        ];
+
+        foreach ($data as $currentVersion => $expectedVersion) {
+            $current = Version::fromString($currentVersion);
+            $result  = $current->major();
+            static::assertEquals(Version::fromString($expectedVersion), $result);
+            static::assertNotSame($current, $result, '::major() should create a new version.');
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // minor()
+    ////////////////////////////////////////////////////////////////////////////
+    public function testMinor()
+    {
+        $data = [
+            '1.10.10'                  => '1.11.0',
+            '1.10.10-alpha.test'       => '1.11.0',
+            '1.10.10-alpha.test+build' => '1.11.0',
+            '1.10.10+build'            => '1.11.0',
+            '1.0.0+build'              => '1.1.0',
+            '1.0.0-alpha'              => '1.0.0',
+            '1.0.0-alpha+build'        => '1.0.0',
+        ];
+
+        foreach ($data as $currentVersion => $expectedVersion) {
+            $current = Version::fromString($currentVersion);
+            $result  = $current->minor();
+            static::assertEquals(Version::fromString($expectedVersion), $result);
+            static::assertNotSame($current, $result, '::minor() should create a new version.');
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // patch()
+    ////////////////////////////////////////////////////////////////////////////
+    public function testPatch()
+    {
+        $data = [
+            '1.10.10'                  => '1.10.11',
+            '1.10.10+build'            => '1.10.11',
+            '1.10.10-alpha.test'       => '1.10.10',
+            '1.10.10-alpha.test+build' => '1.10.10',
+        ];
+
+        foreach ($data as $currentVersion => $expectedVersion) {
+            $current = Version::fromString($currentVersion);
+            $result  = $current->patch();
+            static::assertEquals(Version::fromString($expectedVersion), $result);
+            static::assertNotSame($current, $result, '::patch() should create a new version.');
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // isEquals()
+    ////////////////////////////////////////////////////////////////////////////
+    public function testIsEquals()
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 0, 0);
@@ -230,9 +296,9 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // greaterThan()
+    // isGreaterThan()
     ////////////////////////////////////////////////////////////////////////////
-    public function testGreaterThan()
+    public function testIsGreaterThan()
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);
@@ -241,9 +307,9 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // greaterThanOrEqual()
+    // isGreaterThanOrEqual()
     ////////////////////////////////////////////////////////////////////////////
-    public function testGreaterThanOrEqual()
+    public function testIsGreaterThanOrEqual()
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);
@@ -252,9 +318,9 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // lessThan()
+    // isLessThan()
     ////////////////////////////////////////////////////////////////////////////
-    public function testLessThan()
+    public function testIsLessThan()
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);
@@ -263,9 +329,9 @@ final class VersionTest extends PHPUnit_Framework_TestCase
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // lessThanOrEqual()
+    // isLessThanOrEqual()
     ////////////////////////////////////////////////////////////////////////////
-    public function testLessThanOrEqual()
+    public function testIsLessThanOrEqual()
     {
         $current = new Version(1, 0, 0);
         $other   = new Version(1, 1, 0);

@@ -147,6 +147,48 @@ final class Version
     }
 
     /**
+     * @throws \SemVer\SemVer\Exception\InvalidArgumentException
+     *
+     * @return Version
+     */
+    public function major() : Version
+    {
+        if ('' !== $this->preRelease && 0 === $this->patch && 0 === $this->minor) {
+            return new self($this->major, 0, 0);
+        }
+
+        return new self($this->major + 1, 0, 0);
+    }
+
+    /**
+     * @throws \SemVer\SemVer\Exception\InvalidArgumentException
+     *
+     * @return Version
+     */
+    public function minor() : Version
+    {
+        if ('' !== $this->preRelease && 0 === $this->patch) {
+            return new self($this->major, $this->minor, 0);
+        }
+
+        return new self($this->major, $this->minor + 1, 0);
+    }
+
+    /**
+     * @throws \SemVer\SemVer\Exception\InvalidArgumentException
+     *
+     * @return Version
+     */
+    public function patch() : Version
+    {
+        if ('' !== $this->preRelease) {
+            return new self($this->major, $this->minor, $this->patch);
+        }
+
+        return new self($this->major, $this->minor, $this->patch + 1);
+    }
+
+    /**
      * @param Version $other
      *
      * @return bool
